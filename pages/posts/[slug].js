@@ -27,7 +27,7 @@ export default function Post({ post }) {
           ),
         }}
       />
-  {post.backlinks.length > 0 ? <LinkedRefs backlinks={post.backlinks} /> : ""}
+  {post?.backlinks.length > 0 ? <LinkedRefs backlinks={post.backlinks} /> : ""}
     </article>
     </Layout>
   );
