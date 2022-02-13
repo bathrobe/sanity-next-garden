@@ -15,7 +15,7 @@ export default function Post({ post }) {
       <p className="pt-6">{dayjs(post?.publishedAt).format("MMMM D, YYYY")}</p>
       <hr className="pb-8 mt-2"/>
       <PortableText
-        content={post?.body}
+        content={post?.body ? post?.body : " "}
         serializers={{
           image: (props) => (
            <img src={urlFor(props?.mainImage)}/> 
