@@ -15,11 +15,13 @@ export default function Post({ post }) {
       <p className="pt-6">{dayjs(post?.publishedAt).format("MMMM D, YYYY")}</p>
       <hr className="pb-8 mt-2"/>
         {post?.body ? <PortableText
+        className="max-w-xl"
         content={post?.body}
         serializers={{
-          image: (props) => (
-           <img src={urlFor(props?.mainImage)}/> 
+          li: (props) => (<li className="pl-4 py-3">-{props.children}</li>),
+          image: (props) => (<div className="pt-2 pb-6"><img src={urlFor(props?.asset).url()}/></div> 
             ),
+          link: props => (<a className="text-pink-500 hover:underline" target="_blank"href={props?.href}>{props.children}</a>),
           internalLink: (props) => (
             <Link href={`/posts/${props?.slug.current}`}>
               <a className="text-blue-400 hover:underline">{props?.children}</a>
@@ -27,7 +29,7 @@ export default function Post({ post }) {
           ),
         }}
       /> : "" }
-  {post?.backlinks.length > 0 ? <LinkedRefs backlinks={post.backlinks} /> : ""}
+  {post?.backlinks?.length > 0 ? <LinkedRefs backlinks={post.backlinks} /> : ""}
     </article>
     </Layout>
   );
