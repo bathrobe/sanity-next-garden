@@ -14,8 +14,8 @@ export default function Post({ post }) {
       <h1 className="text-4xl font-serif">{post?.title}</h1>
       <p className="pt-6">{dayjs(post?.publishedAt).format("MMMM D, YYYY")}</p>
       <hr className="pb-8 mt-2"/>
-      <PortableText
-        content={post?.body ? post?.body : " "}
+        {post?.body ? <PortableText
+        content={post?.body}
         serializers={{
           image: (props) => (
            <img src={urlFor(props?.mainImage)}/> 
@@ -26,7 +26,7 @@ export default function Post({ post }) {
             </Link>
           ),
         }}
-      />
+      /> : "" }
   {post?.backlinks.length > 0 ? <LinkedRefs backlinks={post.backlinks} /> : ""}
     </article>
     </Layout>
