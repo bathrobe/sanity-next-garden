@@ -6,7 +6,12 @@ import { graphQuery } from "../lib/sanity/graphQuery.js";
 
 const makeNodes = (posts) => {
   const postNodes = posts?.map((post) => {
-    let nodeObject = { id: post._id, title: post.title, slug: post.slug };
+    let nodeObject = {
+      id: post._id,
+      title: post.title,
+      slug: post.slug,
+      type: post.category,
+    };
     return nodeObject;
   });
   return postNodes;
@@ -14,21 +19,41 @@ const makeNodes = (posts) => {
 
 const makeEdges = (posts) => {
   let edges = [];
-  posts.map((p) => {
-    return p.backlinks.map((b) => {
-      edges.push({ source: b._id, target: p._id });
+  posts.map((post) => {
+    return post.backlinks.map((backlink) => {
+      edges.push({ source: backlink._id, target: post._id });
     });
   });
-    return edges
+  return edges;
 };
 
 const Node = ({ node }) => {
+  let color = "black";
+  switch (node.type) {
+    case "link":
+      color = "cyan";
+      break;
+    case "book":
+      color = "pink";
+      break;
+    case "note":
+      color = "lightgreen";
+      break;
+    case "journal":
+      color = "purple";
+      break;
+    case "code":
+      color = "orange";
+      break;
+  }
   return (
     <>
       <Link href={`/posts/${node.slug}`}>
         <a>
-          <circle r={10} stroke="black" />
-          <text x="-70" y="35">{node.title}</text>
+          <circle r={10} fill={color} />
+          <text x="-50" y="40">
+            {node.title}
+          </text>
         </a>
       </Link>
     </>
@@ -45,11 +70,11 @@ const GraphPage = ({ posts }) => {
   return (
     <Layout>
       <div>
-        <div style={{ height: "100vh" }}>
+        <div style={{ width: "100vw", height: "100vh" }}>
           <Graph
             data={data}
             id="graph"
-            nodeDistance={22000}
+            nodeDistance={1050}
             NodeComponent={Node}
             pullIn={true}
             enableDrag={true}
