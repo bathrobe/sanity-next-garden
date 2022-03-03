@@ -12,7 +12,6 @@ import OGLink from "../../components/OGLink.jsx"
 import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter';
 import {materialDark } from "react-syntax-highlighter/dist/cjs/styles/prism"
 export default function Post({ post }) {
-  
   return (
     <Layout>
       <article className="max-w-container mx-auto">
