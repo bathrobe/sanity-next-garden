@@ -13,7 +13,6 @@ import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter';
 import {materialDark } from "react-syntax-highlighter/dist/cjs/styles/prism"
 export default function Post({ post }) {
   console.log(post);
-  const {book, relatedUrl, category} = post
   return (
     <Layout>
       <article className="max-w-container mx-auto">
@@ -23,8 +22,8 @@ export default function Post({ post }) {
         </p>
               <p className="py-2 text-gray-400 italic uppercase text-sm">{post?.category}</p>
         <hr className="pb-8 mt-2" />
-        {category === "link" ? <OGLink url={relatedUrl}/> : ""}
-        {category === "book" ? <Book book={book}/> : ""}
+        {category === "link" ? <OGLink url={post?.relatedUrl}/> : ""}
+        {category === "book" ? <Book book={post?.book}/> : ""}
         {post?.body ? (
           <PortableText
             className="max-w-xl"
