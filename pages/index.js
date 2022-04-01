@@ -5,6 +5,7 @@ import { homeQuery } from "../lib/sanity/homeQuery";
 import Intro from "../components/Intro.jsx"
 import dayjs from "dayjs"
 export default function Home({ posts }) {
+  console.log(posts)
   return (
     <Layout>
     <div className="max-w-container mx-auto">
@@ -16,7 +17,7 @@ export default function Home({ posts }) {
             <li className="py-4 " key={p._id}>
               <Link href={`/posts/${p.slug}`}>
                 <a className="py-8 text-xl hover:underline" >{p.title}</a>
-              </Link> - <span className="text-gray-600 text-base">{dayjs(p.publishedAt).format("MMMM D, YYYY")}</span>
+            </Link> - <span className="text-gray-600 text-base">{dayjs(p.publishedAt).format("MMMM D, YYYY")} / {p.category}</span>
             </li>
           ))}
         </ul>
