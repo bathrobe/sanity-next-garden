@@ -7,7 +7,7 @@ const LinkedRefs = ({ backlinks }) => {
       {backlinks.map((backlink) => {
         return (
           <Link href={`/posts/${backlink.slug.current}`}>
-            <a className="hover:underline text-green-500">{backlink.title}</a>
+            <a className="hover:underline text-green-500"><p className="py-2">{backlink.title}</p></a>
           </Link>
         );
       })}
