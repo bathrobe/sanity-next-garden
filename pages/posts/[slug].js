@@ -15,7 +15,7 @@ export default function Post({ post }) {
   return (
     <Layout>
       <article className="max-w-container mx-auto">
-        <h1 className="text-4xl font-serif">{post?.title}</h1>
+        <h1 className="text-4xl pt-8 ">{post?.title}</h1>
         <p className="pt-6">
           {dayjs(post?.publishedAt).format("MMMM D, YYYY")}
         </p>
@@ -23,6 +23,7 @@ export default function Post({ post }) {
         <hr className="pb-8 mt-2" />
         {post?.category === "link" ? <OGLink url={post?.relatedUrl}/> : ""}
         {post?.category === "book" ? <Book book={post?.book}/> : ""}
+        <div className="max-w-[65ch] mx-auto">
         {post?.body ? (
           <PortableText
             className="max-w-xl"
@@ -67,7 +68,7 @@ export default function Post({ post }) {
           />
         ) : (
           ""
-        )}
+        )}</div>
         {post?.backlinks?.length > 0 ? (
           <LinkedRefs backlinks={post.backlinks} />
         ) : (

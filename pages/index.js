@@ -4,8 +4,8 @@ import Layout from "../components/Layout.jsx"
 import { homeQuery } from "../lib/sanity/homeQuery";
 import Intro from "../components/Intro.jsx"
 import dayjs from "dayjs"
+import PostCard from "../components/PostCard.jsx"
 export default function Home({ posts }) {
-  console.log(posts)
   return (
     <Layout>
     <div className="max-w-container mx-auto">
@@ -14,11 +14,7 @@ export default function Home({ posts }) {
         <hr className="py-4"/>
         <ul>
           {posts.map((p) => (
-            <li className="py-4 " key={p._id}>
-              <Link href={`/posts/${p.slug}`}>
-                <a className="py-8 text-xl hover:underline" >{p.title}</a>
-            </Link> - <span className="text-gray-600 text-base">{dayjs(p.publishedAt).format("MMMM D, YYYY")} / {p.category}</span>
-            </li>
+            <PostCard post={p}/>
           ))}
         </ul>
       </main>
